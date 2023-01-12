@@ -11,6 +11,8 @@ public:
 
     std::string getRequest(const std::string& url);
 
+    void addHeader(const std::string& headerName, const std::string& headerValue);
+
 private:
     CURL* curl;
     struct curl_slist* headers;

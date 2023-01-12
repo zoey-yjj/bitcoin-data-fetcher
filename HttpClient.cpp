@@ -30,3 +30,9 @@ std::string HttpClient::getRequest(const std::string& url) {
 
     return response;
 }
+
+void HttpClient::addHeader(const std::string& headerName, const std::string& headerValue) {
+    std::string header = headerName + ": " + headerValue;
+    headers = curl_slist_append(headers, header.c_str());
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+}

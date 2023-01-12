@@ -8,6 +8,9 @@ Json::Value CoinMarketCap::getMarketData(const std::string& symbol) {
 
     HttpClient httpClient;
 
+    httpClient.addHeader("X-CMC_PRO_API_KEY", apiKey);
+
+
     std::string response = httpClient.getRequest(url);
 
     return response;

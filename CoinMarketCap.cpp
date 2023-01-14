@@ -4,7 +4,7 @@
 
 CoinMarketCap::CoinMarketCap(const std::string& apiKey) : apiKey(apiKey) {}
 
-Json::Value CoinMarketCap::getMarketData(const std::string& symbol) {
+Json::Value CoinMarketCap::getMarketData(const std::string& symbol, const std::string& base) {
     std::string url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=" + symbol;
 
     HttpClient httpClient;
@@ -21,5 +21,5 @@ Json::Value CoinMarketCap::getMarketData(const std::string& symbol) {
         return Json::Value();
     }
 
-    return jsonData;
+    return jsonData["data"][symbol]["quote"][base];
 }

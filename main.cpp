@@ -10,7 +10,13 @@ int main() {
     CoinMarketCap coinMarketCap(apiKey);
     Json::Value coinData = coinMarketCap.getMarketData(symbol, base);
 
-    std::cout << "coinData is " << coinData << std::endl;
+    if (coinData.size() == 0) {
+        std::cout << "Symbol/Base: " << symbol << "/" << base << " is not available..." << std::endl;
+    } else {
+        std::cout << "Symbol/Base: " << symbol << "/" << base << std::endl;
+        std::cout << "Price: " << coinData["price"].asFloat() << std::endl;
+        std::cout << "Market Cap: " << coinData["market_cap"].asFloat() << std::endl;
+    }
 
     return 0;
 }

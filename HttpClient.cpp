@@ -21,6 +21,7 @@ std::string HttpClient::getRequest(const std::string& url) {
     std::string response;
 
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 
     CURLcode result = curl_easy_perform(curl);
@@ -35,4 +36,11 @@ void HttpClient::addHeader(const std::string& headerName, const std::string& hea
     std::string header = headerName + ": " + headerValue;
     headers = curl_slist_append(headers, header.c_str());
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+}
+
+size_t HttpClient::writeCallback(void* buffer, size_t size, size_t nmemb, void* userp) {
+    size_t totalSize = size * nmemb;
+    std::string* response = static_cast<std::string*>(userp);
+    response->append(static_cast<char*>(buffer), totalSize);
+    return totalSize;
 }

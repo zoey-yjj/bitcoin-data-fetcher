@@ -17,6 +17,7 @@ private:
     CURL* curl;
     struct curl_slist* headers;
 
+    static size_t writeCallback(void* buffer, size_t size, size_t nmemb, void* userp);
 };
 
 #endif

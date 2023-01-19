@@ -1,5 +1,6 @@
 #include "CoinMarketCap.h"
 #include "HttpClient.h"
+#include "TelegramBot.h"
 #include <iostream>
 
 int main() {
@@ -24,6 +25,16 @@ int main() {
         std::cout << "Price: " << coinData["price"].asFloat() << std::endl;
         std::cout << "Market Cap: " << coinData["market_cap"].asFloat() << std::endl;
     }
+
+    // Get the current price of a cryptocurrency
+    double currentPrice = coinData["price"].asFloat();
+
+    // Create an instance of TelegramBot with bot token and chat ID
+    TelegramBot telegramBot("bot_token", "chat_id");
+
+    // Send the current price to Telegram
+    std::string message = "Current price of BTC: $" + std::to_string(currentPrice);
+    telegramBot.sendMessage(message);
 
     return 0;
 }

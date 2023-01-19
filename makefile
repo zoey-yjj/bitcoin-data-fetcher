@@ -8,7 +8,7 @@ else
 
 endif
 
-fetcher: main.cpp  ./CoinMarketCap.cpp  ./HttpClient.cpp  
+fetcher: main.cpp  ./CoinMarketCap.cpp  ./HttpClient.cpp  ./TelegramBot.cpp
 	$(CXX) -o fetcher  $^ $(CXXFLAGS) -ljsoncpp -lcurl
 
 clean:

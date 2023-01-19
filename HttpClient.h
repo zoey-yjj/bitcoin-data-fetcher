@@ -10,7 +10,7 @@ public:
     ~HttpClient();
 
     std::string getRequest(const std::string& url);
-
+    std::string postRequest(const std::string& url, const std::string& data);
     void addHeader(const std::string& headerName, const std::string& headerValue);
 
 private:
